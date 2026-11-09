@@ -1,5 +1,9 @@
 # Airway aerosol delivery — CFD workflow
 
+> **Running the remaining v002 study on the desktop (Ryzen 9 9950X3D):** see [local/README.md](local/README.md).
+> Large data (meshes, saved cases, geometry) is not in this repo; it is moved with `local/bundle.py`.
+> Cloud (AWS) path: [cloud/README.md](cloud/README.md).
+
 OpenFOAM v2406 (run through Docker image `opencfd/openfoam-default:2406`), Python, pandas, matplotlib.
 All settings are in `config/experiment.yaml`; reasoning is in `docs/MODEL_DECISIONS.md`.
 
