@@ -12,8 +12,9 @@ You only have to double-click one file; it does everything else.
 ## Steps
 
 ### 1. Download the data
-Open the Google Drive link from Nishanth and download everything into one folder, for example `Downloads\airway_data`.
-- If Google Drive gives you several `.zip` files, put them all in that same folder. You don't need to unzip them yourself.
+Open the Google Drive link from Nishanth and download everything into your **Downloads** folder.
+- Google Drive may give you `.zip` files instead: leave them in Downloads. You don't need to unzip them yourself.
+- The program finds the data in Downloads, Desktop or Documents on its own. If it can't, it asks you to pick the folder. Pick the folder with the **Google Drive files** (`airway_data.tar.part01`, … or `airway_data…zip`), **not** the program folder.
 
 ### 2. Download the program
 1. Go to **https://github.com/Nishanth-S-S/airway-aerosol-delivery**.
@@ -60,6 +61,7 @@ Later, Nishanth may ask you to run the next part. When he does, double-click `ST
 | The PC restarted, or the window was closed | Double-click `START_HERE.bat`. It continues from the last save. |
 | A red error message | Take a screenshot of the window and send it to Nishanth. |
 | "Virtualization" or "SVM" error at step 1 | Restart into the BIOS (press Del or F2 while the PC starts), turn on **SVM Mode** (often under Advanced → CPU Configuration), save and restart. Then run `START_HERE.bat` again. |
+| "That folder does not contain the data" | You picked the wrong folder (often the program's own `data` folder). Pick the folder with the Google Drive download. |
 | Nishanth asks for the results early | Double-click **`SEND_RESULTS.bat`**. The zip appears on your Desktop. |
 
 Nothing is installed outside the Linux part. To remove everything afterwards, open PowerShell and run `wsl --unregister Ubuntu-24.04`.

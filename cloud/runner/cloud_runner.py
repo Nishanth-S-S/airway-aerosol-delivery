@@ -79,7 +79,13 @@ def core_groups():
     if not groups:
         n = os.cpu_count() or 8
         groups = {str(i): list(range(i, min(i + 8, n))) for i in range(0, n, 8)}
-    return [sorted(v) for _, v in sorted(groups.items(), key=lambda kv: min(kv[1]))]
+    out = []
+    for _, v in sorted(groups.items(), key=lambda kv: min(kv[1])):
+        v = sorted(v)
+        # a "shared L3" wider than 8 cores is a virtualised view (WSL2/Hyper-V reports one L3 for all 16 cores of a
+        # 9950X3D); real Zen 4/5 CCDs have 8 cores, numbered CCD by CCD -> split into blocks of 8 in core order
+        out += [v[i:i + 8] for i in range(0, len(v), 8)] if len(v) > 8 else [v]
+    return out
 
 
 def group_l3_kb(groups):

@@ -46,12 +46,12 @@ docker pull "$IMAGE"
 # 5. executables (git / zip transfers can drop the executable bit)
 chmod +x local/*.sh tools/openfoam/bin/* 2>/dev/null || true
 
-# 6. CPU layout: WSL2 often hides the cache topology -> pin the two CCDs explicitly
+# 6. CPU layout: WSL2 often hides the real cache topology -> save the detected two-CCD layout (re-detected every run,
+#    so a wrong earlier value is replaced; native Linux needs no file)
 PY=$MAMBA_ROOT_PREFIX/envs/airway/bin/python3
-GROUPS_FOUND=$("$PY" -c 'import sys;sys.path.insert(0,"cloud/runner");from cloud_runner import core_groups;print(";".join(",".join(map(str,g)) for g in core_groups()))')
-echo "core groups detected (one thread per physical core): $GROUPS_FOUND"
-if grep -qi microsoft /proc/version && [ ! -f local/desktop.env ]; then
-  echo "WSL2 detected: saving the detected layout to local/desktop.env (edit it if 'check' reports a problem)"
+GROUPS_FOUND=$(env -u AIRWAY_CORE_GROUPS "$PY" -c 'import sys;sys.path.insert(0,"cloud/runner");from cloud_runner import core_groups;print(";".join(",".join(map(str,g)) for g in core_groups()))')
+echo "core groups detected (one thread per physical core, one group per CCD): $GROUPS_FOUND"
+if grep -qi microsoft /proc/version; then
   echo "export AIRWAY_CORE_GROUPS=\"$GROUPS_FOUND\"" > local/desktop.env
 fi
 echo

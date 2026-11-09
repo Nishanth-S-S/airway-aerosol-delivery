@@ -41,6 +41,33 @@ function PackResults([string]$label) {
     } else { Say "Could not create the results file." Red }
 }
 
+function DataIn([string]$d, [int]$depth) {
+    if (-not (Test-Path $d)) { return $null }
+    $f = Get-ChildItem -Path $d -Recurse -Depth $depth -ErrorAction SilentlyContinue |
+        Where-Object { -not $_.PSIsContainer -and ($_.Name -match '^airway_data\.tar\.part\d+$' -or $_.Name -match '^airway_data.*\.zip$') } |
+        Select-Object -First 1
+    if ($f) { return $f.DirectoryName } else { return $null }
+}
+function HasData([string]$d) { return [bool](DataIn $d 4) }
+function FindData {
+    $home_ = [Environment]::GetFolderPath("UserProfile")
+    foreach ($r in @((Join-Path $home_ "Downloads"), [Environment]::GetFolderPath("Desktop"), [Environment]::GetFolderPath("MyDocuments"))) {
+        $d = DataIn $r 3
+        if (-not $d) { continue }
+        if ($d -match '\\_unzipped\\') { return ($d -replace '\\_unzipped\\.*$', '') }   # our own earlier unzip
+        $man = Join-Path $d "MANIFEST.json"
+        if (Test-Path $man) {
+            $n = (Get-Content $man -Raw | ConvertFrom-Json).n_parts
+            $have = @(Get-ChildItem -Path $d -Filter "airway_data.tar.part*").Count
+            if ($n -and $have -ge $n) { return $d }      # complete bundle in one folder
+        }
+        $z = @(Get-ChildItem -Path $d -Filter "airway_data*.zip").Count
+        if ($z -gt 0) { return $d }                       # Google Drive zips (unzipped below)
+        return (Split-Path $d -Parent)                    # parts spread over sibling folders
+    }
+    return $null
+}
+
 # ------------------------------------------------------------------ results only
 if ($PackOnly) {
     if (-not (DistroReady)) { Fail "Linux is not installed yet - run START_HERE.bat first." }
@@ -103,10 +130,21 @@ if ($have -notmatch 'memory=56GB') {
 # ------------------------------------------------------------------ 3. code
 Step 3 "Download / update the study code"
 $null = L "command -v git >/dev/null || (apt-get update -q && DEBIAN_FRONTEND=noninteractive apt-get install -y -q git)"
-$rc = L "if [ -d $Proj/.git ]; then cd $Proj && (git pull --ff-only -q || echo 'Note: code not updated, continuing with the current version'); else git clone -q $Repo $Proj; fi"
+$rc = L "if [ -d $Proj/.git ]; then cd $Proj && git config core.fileMode false && git fetch -q origin && (git merge --ff-only -q origin/main 2>/dev/null || git reset -q --keep origin/main || echo 'Note: code not updated, continuing with the current version'); else git clone -q $Repo $Proj && git -C $Proj config core.fileMode false; fi"
 if ($rc -ne 0) { Fail "Could not download the code from GitHub. Check the internet connection and run START_HERE.bat again." }
-$null = L "git -C $Proj config core.fileMode false"
 Say "Code is up to date." Green
+# keep these Windows files (START_HERE, STATUS, STOP, ...) up to date too, then restart once with the new version
+if ($PSScriptRoot -match '^[A-Za-z]:\\' -and -not $env:AIRWAY_SELF_UPDATED) {
+    $before = (Get-FileHash $PSCommandPath).Hash
+    $wd = ToWsl $PSScriptRoot
+    $null = L "cp -f $Proj/windows/*.ps1 $Proj/windows/*.bat $Proj/windows/*.md '$wd/' 2>/dev/null; true"
+    if ((Get-FileHash $PSCommandPath).Hash -ne $before) {
+        Say "This program was updated - restarting it..." Yellow
+        $env:AIRWAY_SELF_UPDATED = "1"
+        Start-Process powershell.exe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`""
+        exit
+    }
+}
 
 # ------------------------------------------------------------------ 4. tools
 Step 4 "Install the simulation tools (first time: 10-20 minutes, later: seconds)"
@@ -118,23 +156,32 @@ Say "Tools are ready." Green
 Step 5 "Simulation data from Nishanth (about 6.5 GB)"
 $rc = L "test -f $Proj/cases/airflow/V_MESH_fine_T_N40_SYM/processor7/0.52/U_0"
 if ($rc -ne 0) {
-    Say "A window will open: choose the folder where you saved the data Nishanth sent you." Yellow
-    Say "(It contains MANIFEST.json and airway_data.tar.part01, part02, ... - or the .zip files from Google Drive.)" Gray
-    Add-Type -AssemblyName System.Windows.Forms
-    $owner = New-Object System.Windows.Forms.Form -Property @{ TopMost = $true }
-    $dlg = New-Object System.Windows.Forms.FolderBrowserDialog
-    $dlg.Description = "Choose the folder with the airway data (MANIFEST.json + airway_data.tar.part files or .zip files)"
-    if ($dlg.ShowDialog($owner) -ne [System.Windows.Forms.DialogResult]::OK) { Fail "No folder chosen. Run START_HERE.bat again when the data is downloaded." }
-    $src = $dlg.SelectedPath
-    $zips = Get-ChildItem -Path $src -Filter *.zip -Recurse -ErrorAction SilentlyContinue
+    $src = FindData
+    if ($src) { Say "Found the data in: $src" Green }
+    for ($try = 1; (-not $src) -and $try -le 3; $try++) {
+        Say "Could not find the data automatically. A window will open: choose the folder where you saved" Yellow
+        Say "the files from Nishanth's Google Drive link (NOT the program folder)." Yellow
+        Say "(Files named MANIFEST.json and airway_data.tar.part01, part02, ... - or airway_data_for_friend-....zip)" Gray
+        Add-Type -AssemblyName System.Windows.Forms
+        $owner = New-Object System.Windows.Forms.Form -Property @{ TopMost = $true }
+        $dlg = New-Object System.Windows.Forms.FolderBrowserDialog
+        $dlg.Description = "Choose the folder with the data from Nishanth's Google Drive (airway_data.tar.part01 ... or airway_data...zip)"
+        if ($dlg.ShowDialog($owner) -ne [System.Windows.Forms.DialogResult]::OK) {
+            Fail "No folder chosen. Download the data from Nishanth's Google Drive link (about 7 GB), then run START_HERE.bat again."
+        }
+        if (HasData $dlg.SelectedPath) { $src = $dlg.SelectedPath }
+        else { Say ""; Say "That folder does not contain the data: $($dlg.SelectedPath)" Red; Say "" }
+    }
+    if (-not $src) { Fail "Could not find the data. Download it from Nishanth's Google Drive link (about 7 GB) into Downloads, then run START_HERE.bat again." }
+    $zips = Get-ChildItem -Path $src -Filter "airway_data*.zip" -Recurse -Depth 3 -ErrorAction SilentlyContinue
     foreach ($z in $zips) {
         $to = Join-Path $src ("_unzipped\" + $z.BaseName)
-        if (-not (Test-Path $to)) { Say "Unzipping $($z.Name) ..."; Expand-Archive -Path $z.FullName -DestinationPath $to -Force }
+        if (-not (Test-Path $to)) { Say "Unzipping $($z.Name) (a few minutes)..."; Expand-Archive -Path $z.FullName -DestinationPath $to -Force }
     }
     $w = ToWsl $src
     Say "Copying and checking the data (5-15 minutes)..."
     $rc = L "cd $Proj && python3 local/bundle.py unpack '$w'"
-    if ($rc -ne 0) { Fail "The data is incomplete or damaged (see above). Ask Nishanth to check that all parts were shared, download again, and run START_HERE.bat again." }
+    if ($rc -ne 0) { Fail "Could not unpack the data (reason above). If a part is missing, ask Nishanth to check the Google Drive folder has all 5 files, download again, and run START_HERE.bat again." }
 }
 Say "Data is in place." Green
 
