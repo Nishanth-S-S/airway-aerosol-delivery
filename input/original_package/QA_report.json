@@ -1,0 +1,107 @@
+{
+  "Healthy_Airway_APPROVED_v001": {
+    "verified_STEP_reimport_solid_count": 1,
+    "units": "mm",
+    "parent_diameter_mm": 8.0,
+    "parent_length_mm": 40.0,
+    "daughter_diameter_mm": 6.0,
+    "daughter_centerline_length_mm": 60.0,
+    "daughter_angle_from_parent_deg": 30.0,
+    "right_outlet_center_mm": [
+      30.0,
+      0.0,
+      91.961524
+    ],
+    "left_outlet_center_mm": [
+      -30.0,
+      0.0,
+      91.961524
+    ],
+    "target_min_diameter_mm": 6.0,
+    "narrowing_start_mm": null,
+    "narrowing_center_mm": null,
+    "narrowing_end_mm": null,
+    "junction_fillet_mm": 0.5,
+    "volume_mm3": 5323.714413,
+    "bounding_box_mm": {
+      "xmin": -32.598076,
+      "xmax": 32.598076,
+      "ymin": -4.0,
+      "ymax": 4.0,
+      "zmin": -0.0,
+      "zmax": 93.461524
+    },
+    "STEP_bytes": 172358,
+    "STL_bytes": 1985084
+  },
+  "Airway_N20_APPROVED_v001": {
+    "verified_STEP_reimport_solid_count": 1,
+    "units": "mm",
+    "parent_diameter_mm": 8.0,
+    "parent_length_mm": 40.0,
+    "daughter_diameter_mm": 6.0,
+    "daughter_centerline_length_mm": 60.0,
+    "daughter_angle_from_parent_deg": 30.0,
+    "right_outlet_center_mm": [
+      30.0,
+      0.0,
+      91.961524
+    ],
+    "left_outlet_center_mm": [
+      -30.0,
+      0.0,
+      91.961524
+    ],
+    "target_min_diameter_mm": 4.8,
+    "narrowing_start_mm": 14.0,
+    "narrowing_center_mm": 20.0,
+    "narrowing_end_mm": 26.0,
+    "junction_fillet_mm": 0.5,
+    "volume_mm3": 5260.896927,
+    "bounding_box_mm": {
+      "xmin": -32.598076,
+      "xmax": 32.598076,
+      "ymin": -4.0,
+      "ymax": 4.0,
+      "zmin": -0.0,
+      "zmax": 93.461524
+    },
+    "STEP_bytes": 180906,
+    "STL_bytes": 2317684
+  },
+  "Airway_N40_APPROVED_v001": {
+    "verified_STEP_reimport_solid_count": 1,
+    "units": "mm",
+    "parent_diameter_mm": 8.0,
+    "parent_length_mm": 40.0,
+    "daughter_diameter_mm": 6.0,
+    "daughter_centerline_length_mm": 60.0,
+    "daughter_angle_from_parent_deg": 30.0,
+    "right_outlet_center_mm": [
+      30.0,
+      0.0,
+      91.961524
+    ],
+    "left_outlet_center_mm": [
+      -30.0,
+      0.0,
+      91.961524
+    ],
+    "target_min_diameter_mm": 3.6,
+    "narrowing_start_mm": 14.0,
+    "narrowing_center_mm": 20.0,
+    "narrowing_end_mm": 26.0,
+    "junction_fillet_mm": 0.5,
+    "volume_mm3": 5208.161255,
+    "bounding_box_mm": {
+      "xmin": -32.598076,
+      "xmax": 32.598076,
+      "ymin": -4.0,
+      "ymax": 4.0,
+      "zmin": -0.0,
+      "zmax": 93.461524
+    },
+    "STEP_bytes": 180906,
+    "STL_bytes": 2442884
+  }
+}

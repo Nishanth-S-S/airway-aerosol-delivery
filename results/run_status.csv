@@ -1,0 +1,30 @@
+case_id,case_type,geometry,waveform,particle_size_um,release_strategy,mesh_status,solver_status,particle_status,qa_status,notes,updated
+T_N40_SYM,airflow,n40,beta33,,,PASSED,completed,,PASSED,29.7 min; imbalance 9.90e-07 %; target branch 39.1 % of flow; peak dp 2.64 Pa,2026-11-05T17:24:24
+V_MESH_fine_T_N40_SYM,airflow,n40,beta33,,,PASSED,running,,pending,mesh 458045 cells; started 17:29,2026-11-06T17:29:30
+mesh_n40_coarse,mesh,n40,,,,PASSED,n/a,n/a,PASSED,"59428 cells, maxNonOrtho 51.080062, maxSkew 1.2550065",2026-11-05T16:54:27
+mesh_n40_fine,mesh,n40,,,,PASSED,n/a,n/a,PASSED,"458045 cells, maxNonOrtho 64.63227, maxSkew 3.2305676",2026-11-06T17:29:25
+mesh_n40_medium,mesh,n40,,,,PASSED,n/a,n/a,PASSED,"218220 cells, maxNonOrtho 63.141723, maxSkew 2.6413043",2026-11-05T17:27:06
+P01_CONT_N40_SYM,particle,n40,beta33,1,continuous,PASSED,completed,completed,PASSED,"delivery 35.42 %, balance err -4.50e-06 %",2026-11-05T17:46:36
+P01_EARLY_N40_SYM,particle,n40,beta33,1,early,PASSED,completed,completed,PASSED,"delivery 37.28 %, balance err 2.07e-06 %",2026-11-05T17:46:23
+P01_LATE_N40_SYM,particle,n40,beta33,1,late,PASSED,completed,completed,PASSED,"delivery 36.73 %, balance err -3.63e-06 %",2026-11-05T17:49:42
+P01_MID_N40_SYM,particle,n40,beta33,1,middle,PASSED,completed,completed,PASSED,"delivery 36.85 %, balance err 3.55e-06 %",2026-11-05T17:49:41
+P02_CONT_N40_SYM,particle,n40,beta33,2,continuous,PASSED,completed,completed,PASSED,"delivery 35.43 %, balance err 1.17e-06 %",2026-11-05T17:53:28
+P02_EARLY_N40_SYM,particle,n40,beta33,2,early,PASSED,completed,completed,PASSED,"delivery 37.32 %, balance err -5.74e-07 %",2026-11-05T17:53:10
+P02_LATE_N40_SYM,particle,n40,beta33,2,late,PASSED,completed,completed,PASSED,"delivery 36.73 %, balance err 4.45e-06 %",2026-11-05T17:57:17
+P02_MID_N40_SYM,particle,n40,beta33,2,middle,PASSED,completed,completed,PASSED,"delivery 36.87 %, balance err -1.38e-06 %",2026-11-05T17:56:43
+P03_CONT_N40_SYM,particle,n40,beta33,3,continuous,PASSED,completed,completed,PASSED,"delivery 35.40 %, balance err -1.99e-07 %",2026-11-05T18:02:14
+P03_EARLY_N40_SYM,particle,n40,beta33,3,early,PASSED,completed,completed,PASSED,"delivery 37.26 %, balance err 1.76e-06 %",2026-11-05T18:01:57
+P03_LATE_N40_SYM,particle,n40,beta33,3,late,PASSED,completed,completed,PASSED,"delivery 36.74 %, balance err 2.06e-06 %",2026-11-05T18:05:56
+P03_MID_N40_SYM,particle,n40,beta33,3,middle,PASSED,completed,completed,PASSED,"delivery 36.81 %, balance err 3.45e-07 %",2026-11-05T18:05:56
+P05_CONT_N40_SYM,particle,n40,beta33,5,continuous,PASSED,completed,completed,PASSED,"delivery 35.20 %, balance err -2.79e-06 %",2026-11-05T18:09:39
+P05_EARLY_N40_SYM,particle,n40,beta33,5,early,PASSED,completed,completed,PASSED,"delivery 37.08 %, balance err -4.49e-06 %",2026-11-05T18:09:23
+P05_LATE_N40_SYM,particle,n40,beta33,5,late,PASSED,completed,completed,PASSED,"delivery 36.57 %, balance err 4.29e-06 %",2026-11-05T18:13:34
+P05_MID_N40_SYM,particle,n40,beta33,5,middle,PASSED,completed,completed,PASSED,"delivery 36.61 %, balance err -8.04e-07 %",2026-11-05T18:13:06
+MAP_T_N40_SYM_P01,validation,n40,beta33,1,continuous,PASSED,completed,completed,PASSED,"delivery 34.81 %, balance err -2.39e-06 %",2026-11-05T17:32:51
+MAP_T_N40_SYM_P02,validation,n40,beta33,2,continuous,PASSED,completed,completed,PASSED,"delivery 34.83 %, balance err -9.34e-07 %",2026-11-05T17:32:35
+MAP_T_N40_SYM_P03,validation,n40,beta33,3,continuous,PASSED,completed,completed,PASSED,"delivery 34.81 %, balance err -4.87e-06 %",2026-11-05T17:43:17
+MAP_T_N40_SYM_P05,validation,n40,beta33,5,continuous,PASSED,completed,completed,PASSED,"delivery 34.67 %, balance err -5.61e-07 %",2026-11-05T17:43:04
+MAP_V_MESH_medium_T_N40_SYM_P01,validation,n40,beta33,1,continuous,PASSED,completed,completed,PASSED,"delivery 36.09 %, balance err -1.76e-06 %",2026-11-06T17:20:47
+MAP_V_MESH_medium_T_N40_SYM_P03,validation,n40,beta33,3,continuous,PASSED,completed,completed,PASSED,"delivery 36.11 %, balance err 2.63e-06 %",2026-11-06T17:20:50
+MAP_V_MESH_medium_T_N40_SYM_P05,validation,n40,beta33,5,continuous,PASSED,completed,completed,PASSED,"delivery 36.02 %, balance err -4.69e-06 %",2026-11-06T17:21:05
+V_MESH_medium_T_N40_SYM,validation,n40,beta33,,,PASSED,completed,,PASSED,finished after gate; split 38.50 %,2026-11-06T17:14:49

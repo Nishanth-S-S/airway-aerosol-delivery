@@ -1,0 +1,37 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  airway-aerosol-delivery : reusable AIRFLOW base case (OpenFOAM v2406)
+  Case-specific values come from system/caseParameters (written by
+  scripts/generate_airflow_cases.py from config/experiment.yaml).
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+}
+
+#include "caseParameters"
+application     pimpleFoam;
+startFrom       latestTime;
+startTime       0;
+stopAt          endTime;
+endTime         $endTime;
+deltaT          $deltaT;
+writeControl    adjustable;
+writeInterval   $writeInterval;
+purgeWrite      0;
+writeFormat     $writeFormat;
+writePrecision  8;
+writeCompression off;
+timeFormat      general;
+timePrecision   8;
+runTimeModifiable true;
+adjustTimeStep  yes;
+maxCo           $maxCo;
+maxDeltaT       $maxDeltaT;
+
+functions
+{
+    #include "functions"
+}

@@ -1,0 +1,91 @@
+/Users/nishanthsadagopa/anaconda3/lib/python3.10/site-packages/pandas/core/arrays/masked.py:60: UserWarning: Pandas requires version '1.3.6' or newer of 'bottleneck' (version '1.3.5' currently installed).
+  from pandas.core import (
+2026-11-05 16:51:46 particle queue: 214 tasks
+    $ /work/tools/openfoam/bin/airwayParcelFoam   (log: cases/particles/MAP_T_N40_SYM_P01/logs/airwayParcelFoam.log)
+    $ /work/tools/openfoam/bin/airwayParcelFoam   (log: cases/particles/MAP_T_N40_SYM_P02/logs/airwayParcelFoam.log)
+[PASSED] MAP_T_N40_SYM_P02 in 7.5 min: target delivery 34.83 %, mass balance error -9.34e-07 %
+[PASSED] MAP_T_N40_SYM_P01 in 7.7 min: target delivery 34.81 %, mass balance error -2.39e-06 %
+  [png] results/visualizations/MAP_T_N40_SYM_P02/ (trajectories, mass budget, arrival times)
+2026-11-05 17:32:57 particles PASSED MAP_T_N40_SYM_P02: delivery 34.83 %, n 100191, balance -9.3e-07 %
+  [png] results/visualizations/MAP_T_N40_SYM_P01/ (trajectories, mass budget, arrival times)
+2026-11-05 17:33:07 particles PASSED MAP_T_N40_SYM_P01: delivery 34.81 %, n 100191, balance -2.4e-06 %
+    $ /work/tools/openfoam/bin/airwayParcelFoam   (log: cases/particles/MAP_T_N40_SYM_P05/logs/airwayParcelFoam.log)
+    $ /work/tools/openfoam/bin/airwayParcelFoam   (log: cases/particles/MAP_T_N40_SYM_P03/logs/airwayParcelFoam.log)
+[PASSED] MAP_T_N40_SYM_P05 in 9.9 min: target delivery 34.67 %, mass balance error -5.61e-07 %
+[PASSED] MAP_T_N40_SYM_P03 in 10.1 min: target delivery 34.81 %, mass balance error -4.87e-06 %
+  [png] results/visualizations/MAP_T_N40_SYM_P05/ (trajectories, mass budget, arrival times)
+2026-11-05 17:43:29 particles PASSED MAP_T_N40_SYM_P05: delivery 34.67 %, n 100191, balance -5.6e-07 %
+  [png] results/visualizations/MAP_T_N40_SYM_P03/ (trajectories, mass budget, arrival times)
+2026-11-05 17:43:32 particles PASSED MAP_T_N40_SYM_P03: delivery 34.81 %, n 100191, balance -4.9e-06 %
+    $ /work/tools/openfoam/bin/airwayParcelFoam   (log: cases/particles/P01_CONT_N40_SYM/logs/airwayParcelFoam.log)
+    $ /work/tools/openfoam/bin/airwayParcelFoam   (log: cases/particles/P01_EARLY_N40_SYM/logs/airwayParcelFoam.log)
+[PASSED] P01_EARLY_N40_SYM in 2.8 min: target delivery 37.28 %, mass balance error 2.07e-06 %
+[PASSED] P01_CONT_N40_SYM in 3.0 min: target delivery 35.42 %, mass balance error -4.50e-06 %
+  [png] results/visualizations/P01_EARLY_N40_SYM/ (trajectories, mass budget, arrival times)
+2026-11-05 17:46:50 particles PASSED P01_EARLY_N40_SYM: delivery 37.28 %, n 20083, balance 2.1e-06 %
+  [png] results/visualizations/P01_CONT_N40_SYM/ (trajectories, mass budget, arrival times)
+2026-11-05 17:46:51 particles PASSED P01_CONT_N40_SYM: delivery 35.42 %, n 20002, balance -4.5e-06 %
+    $ /work/tools/openfoam/bin/airwayParcelFoam   (log: cases/particles/P01_MID_N40_SYM/logs/airwayParcelFoam.log)
+    $ /work/tools/openfoam/bin/airwayParcelFoam   (log: cases/particles/P01_LATE_N40_SYM/logs/airwayParcelFoam.log)
+[PASSED] P01_MID_N40_SYM in 2.8 min: target delivery 36.85 %, mass balance error 3.55e-06 %
+[PASSED] P01_LATE_N40_SYM in 2.8 min: target delivery 36.73 %, mass balance error -3.63e-06 %
+  [png] results/visualizations/P01_MID_N40_SYM/ (trajectories, mass budget, arrival times)
+2026-11-05 17:50:07 particles PASSED P01_MID_N40_SYM: delivery 36.85 %, n 20065, balance 3.5e-06 %
+  [png] results/visualizations/P01_LATE_N40_SYM/ (trajectories, mass budget, arrival times)
+2026-11-05 17:50:08 particles PASSED P01_LATE_N40_SYM: delivery 36.73 %, n 20138, balance -3.6e-06 %
+    $ /work/tools/openfoam/bin/airwayParcelFoam   (log: cases/particles/P02_CONT_N40_SYM/logs/airwayParcelFoam.log)
+    $ /work/tools/openfoam/bin/airwayParcelFoam   (log: cases/particles/P02_EARLY_N40_SYM/logs/airwayParcelFoam.log)
+[PASSED] P02_EARLY_N40_SYM in 2.9 min: target delivery 37.32 %, mass balance error -5.74e-07 %
+  [png] results/visualizations/P02_EARLY_N40_SYM/ (trajectories, mass budget, arrival times)
+2026-11-05 17:53:27 particles PASSED P02_EARLY_N40_SYM: delivery 37.32 %, n 20083, balance -5.7e-07 %
+[PASSED] P02_CONT_N40_SYM in 3.2 min: target delivery 35.43 %, mass balance error 1.17e-06 %
+    $ /work/tools/openfoam/bin/airwayParcelFoam   (log: cases/particles/P02_MID_N40_SYM/logs/airwayParcelFoam.log)
+  [png] results/visualizations/P02_CONT_N40_SYM/ (trajectories, mass budget, arrival times)
+2026-11-05 17:53:43 particles PASSED P02_CONT_N40_SYM: delivery 35.43 %, n 20002, balance 1.2e-06 %
+    $ /work/tools/openfoam/bin/airwayParcelFoam   (log: cases/particles/P02_LATE_N40_SYM/logs/airwayParcelFoam.log)
+[PASSED] P02_MID_N40_SYM in 3.0 min: target delivery 36.87 %, mass balance error -1.38e-06 %
+  [png] results/visualizations/P02_MID_N40_SYM/ (trajectories, mass budget, arrival times)
+2026-11-05 17:57:08 particles PASSED P02_MID_N40_SYM: delivery 36.87 %, n 20065, balance -1.4e-06 %
+[PASSED] P02_LATE_N40_SYM in 3.3 min: target delivery 36.73 %, mass balance error 4.45e-06 %
+    $ /work/tools/openfoam/bin/airwayParcelFoam   (log: cases/particles/P03_CONT_N40_SYM/logs/airwayParcelFoam.log)
+  [png] results/visualizations/P02_LATE_N40_SYM/ (trajectories, mass budget, arrival times)
+2026-11-05 17:57:38 particles PASSED P02_LATE_N40_SYM: delivery 36.73 %, n 20138, balance 4.5e-06 %
+    $ /work/tools/openfoam/bin/airwayParcelFoam   (log: cases/particles/P03_EARLY_N40_SYM/logs/airwayParcelFoam.log)
+[PASSED] P03_EARLY_N40_SYM in 4.2 min: target delivery 37.26 %, mass balance error 1.76e-06 %
+[PASSED] P03_CONT_N40_SYM in 4.9 min: target delivery 35.40 %, mass balance error -1.99e-07 %
+  [png] results/visualizations/P03_EARLY_N40_SYM/ (trajectories, mass budget, arrival times)
+2026-11-05 18:02:39 particles PASSED P03_EARLY_N40_SYM: delivery 37.26 %, n 20083, balance 1.8e-06 %
+  [png] results/visualizations/P03_CONT_N40_SYM/ (trajectories, mass budget, arrival times)
+2026-11-05 18:02:40 particles PASSED P03_CONT_N40_SYM: delivery 35.40 %, n 20002, balance -2.0e-07 %
+    $ /work/tools/openfoam/bin/airwayParcelFoam   (log: cases/particles/P03_LATE_N40_SYM/logs/airwayParcelFoam.log)
+    $ /work/tools/openfoam/bin/airwayParcelFoam   (log: cases/particles/P03_MID_N40_SYM/logs/airwayParcelFoam.log)
+[PASSED] P03_MID_N40_SYM in 3.2 min: target delivery 36.81 %, mass balance error 3.45e-07 %
+[PASSED] P03_LATE_N40_SYM in 3.2 min: target delivery 36.74 %, mass balance error 2.06e-06 %
+  [png] results/visualizations/P03_MID_N40_SYM/ (trajectories, mass budget, arrival times)
+2026-11-05 18:06:24 particles PASSED P03_MID_N40_SYM: delivery 36.81 %, n 20065, balance 3.5e-07 %
+  [png] results/visualizations/P03_LATE_N40_SYM/ (trajectories, mass budget, arrival times)
+2026-11-05 18:06:24 particles PASSED P03_LATE_N40_SYM: delivery 36.74 %, n 20138, balance 2.1e-06 %
+    $ /work/tools/openfoam/bin/airwayParcelFoam   (log: cases/particles/P05_EARLY_N40_SYM/logs/airwayParcelFoam.log)
+    $ /work/tools/openfoam/bin/airwayParcelFoam   (log: cases/particles/P05_CONT_N40_SYM/logs/airwayParcelFoam.log)
+[PASSED] P05_EARLY_N40_SYM in 2.9 min: target delivery 37.08 %, mass balance error -4.49e-06 %
+  [png] results/visualizations/P05_EARLY_N40_SYM/ (trajectories, mass budget, arrival times)
+2026-11-05 18:09:39 particles PASSED P05_EARLY_N40_SYM: delivery 37.08 %, n 20083, balance -4.5e-06 %
+[PASSED] P05_CONT_N40_SYM in 3.2 min: target delivery 35.20 %, mass balance error -2.79e-06 %
+    $ /work/tools/openfoam/bin/airwayParcelFoam   (log: cases/particles/P05_MID_N40_SYM/logs/airwayParcelFoam.log)
+  [png] results/visualizations/P05_CONT_N40_SYM/ (trajectories, mass budget, arrival times)
+2026-11-05 18:09:52 particles PASSED P05_CONT_N40_SYM: delivery 35.20 %, n 20002, balance -2.8e-06 %
+    $ /work/tools/openfoam/bin/airwayParcelFoam   (log: cases/particles/P05_LATE_N40_SYM/logs/airwayParcelFoam.log)
+[PASSED] P05_MID_N40_SYM in 3.3 min: target delivery 36.61 %, mass balance error -8.04e-07 %
+  [png] results/visualizations/P05_MID_N40_SYM/ (trajectories, mass budget, arrival times)
+2026-11-05 18:13:28 particles PASSED P05_MID_N40_SYM: delivery 36.61 %, n 20065, balance -8.0e-07 %
+[PASSED] P05_LATE_N40_SYM in 3.4 min: target delivery 36.57 %, mass balance error 4.29e-06 %
+  [png] results/visualizations/P05_LATE_N40_SYM/ (trajectories, mass budget, arrival times)
+2026-11-05 18:13:54 particles PASSED P05_LATE_N40_SYM: delivery 36.57 %, n 20138, balance 4.3e-06 %
+    $ /work/tools/openfoam/bin/airwayParcelFoam   (log: cases/particles/MAP_V_MESH_medium_T_N40_SYM_P03/logs/airwayParcelFoam.log)
+    $ /work/tools/openfoam/bin/airwayParcelFoam   (log: cases/particles/MAP_V_MESH_medium_T_N40_SYM_P01/logs/airwayParcelFoam.log)
+[PASSED] MAP_V_MESH_medium_T_N40_SYM_P01 in 5.4 min: target delivery 36.09 %, mass balance error -1.76e-06 %
+[PASSED] MAP_V_MESH_medium_T_N40_SYM_P03 in 5.5 min: target delivery 36.11 %, mass balance error 2.63e-06 %
+  [png] results/visualizations/MAP_V_MESH_medium_T_N40_SYM_P01/ (trajectories, mass budget, arrival times)
+2026-11-06 17:20:59 particles PASSED MAP_V_MESH_medium_T_N40_SYM_P01: delivery 36.09 %, n 99860, balance -1.8e-06 %
+  [png] results/visualizations/MAP_V_MESH_medium_T_N40_SYM_P03/ (trajectories, mass budget, arrival times)
+2026-11-06 17:21:00 particles PASSED MAP_V_MESH_medium_T_N40_SYM_P03: delivery 36.11 %, n 99860, balance 2.6e-06 %

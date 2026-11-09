@@ -1,0 +1,17 @@
+{
+  "recorded": "2026-11-06, on the Mac (reference platform for all v002 results so far)",
+  "docker_image": "opencfd/openfoam-default@sha256:dd5aa20630a55722663bf83ba0cb74870cba130081303e32e3865007fa2aa35a",
+  "openfoam": "v2406, linux64GccDPInt32Opt, gcc (Ubuntu 13.2.0-23ubuntu4) 13.2.0, Open MPI 4.1.6, x86_64",
+  "sha256": {
+    "bin/pimpleFoam": "593a7f9bfff37ea97f02ece79c21eb91ea5f6d72b3d10ecfc2ce46d8cdf8f933",
+    "bin/decomposePar": "0d7f153880bbf4b398ae72bd6405bddec4dae5514e3ec9dd00b8fe2a37feffd3",
+    "bin/reconstructPar": "0b0ec1770741bcbac94eb3a8df302cd79e6491fce7130d31d6daae0a076308d1",
+    "bin/snappyHexMesh": "b8e04b72ae61cc96bf89ba1c148df1ceeee1d7265100727223cb1943eb9ef757",
+    "lib/libfiniteVolume.so": "d15129c5aa12b3dd9d6ee780625b85d046f3b47d4e2d88bfd8a0d6dcd3733b1f",
+    "lib/libOpenFOAM.so": "9a7940e50d971e9956195168e48ff631b52721ad314df2b1a56b4699ea1121c4",
+    "lib/liblagrangianIntermediate.so": "b6c4ba284b345109edad3cef77d80139e30af797048e4ffaac512bda86de9eb4",
+    "airwayParcelFoam (built on the Mac from tools/openfoam/airwayParcelFoam)": "de2f57ddcfda43bdb1e8f53ca54869c795e23cfce2cae8b2ad8907205b10e7b2"
+  },
+  "particle_solver_source_sha256 (geometry/FROZEN_v002.json)": "0519bd65e6fad5c16d6daf8b4371da7b2c9614789be563fb158ac6a54006e969",
+  "python": {"python": "3.10.11", "numpy": "1.26.4", "pandas": "2.2.3", "scipy": "1.10.0", "matplotlib": "3.7.1", "pyyaml": "6.0.1"}
+}

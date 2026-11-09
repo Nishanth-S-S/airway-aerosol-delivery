@@ -1,0 +1,64 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  airway-aerosol-delivery : reusable AIRFLOW base case (OpenFOAM v2406)
+  Case-specific values come from system/caseParameters (written by
+  scripts/generate_airflow_cases.py from config/experiment.yaml).
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      functions;
+}
+
+// ---- volumetric flow through each boundary (m3/s; inflow negative) -------
+flowInlet
+{
+    type surfaceFieldValue; libs (fieldFunctionObjects);
+    writeControl timeStep; writeInterval 1; log false;
+    regionType patch; name inlet; operation sum; fields (phi); writeFields false;
+}
+flowTargetOutlet     { $flowInlet; name targetOutlet;     }
+flowComparisonOutlet { $flowInlet; name comparisonOutlet; }
+
+// ---- area-averaged kinematic pressure on each boundary (m2/s2) ----------
+pInlet
+{
+    type surfaceFieldValue; libs (fieldFunctionObjects);
+    writeControl timeStep; writeInterval 1; log false;
+    regionType patch; name inlet; operation areaAverage; fields (p); writeFields false;
+}
+pTargetOutlet     { $pInlet; name targetOutlet; }
+pComparisonOutlet { $pInlet; name comparisonOutlet; }
+
+// ---- flow through the target-entry plane (downstream of the narrowing) ---
+pTargetPlane
+{
+    type surfaceFieldValue; libs (fieldFunctionObjects);
+    writeControl timeStep; writeInterval 1; log false;
+    regionType sampledSurface; name targetPlane;
+    sampledSurfaceDict
+    {
+        type cuttingPlane; planeType pointAndNormal;
+        pointAndNormalDict { point $targetPlanePoint; normal $targetPlaneNormal; }
+        bounds $targetPlaneBounds;
+        interpolate true;
+    }
+    operation areaNormalIntegrate; fields (U); writeFields false;
+}
+
+// ---- symmetry-plane (y = 0) snapshots for PNG images, at write times -----
+midPlane
+{
+    type surfaces; libs (sampling);
+    writeControl writeTime;
+    surfaceFormat vtk;
+    formatOptions { vtk { legacy true; format ascii; } }
+    fields (p U);
+    interpolationScheme cellPoint;
+    surfaces
+    {
+        yMid      { type cuttingPlane; point (0 1e-7 0); normal (0 1 0); interpolate false; }
+        walls     { type patch; patches (walls); interpolate false; }
+    }
+}

@@ -1,0 +1,160 @@
+{
+  "share_of_cost_in_flowing_phase": 0.6831691339589752,
+  "cases": [
+    [
+      "T_HLT_EAR",
+      0.85
+    ],
+    [
+      "T_HLT_SYM",
+      0.85
+    ],
+    [
+      "T_HLT_LAT",
+      0.85
+    ],
+    [
+      "T_N20_EAR",
+      0.88
+    ],
+    [
+      "T_N20_SYM",
+      0.88
+    ],
+    [
+      "T_N20_LAT",
+      0.88
+    ],
+    [
+      "T_N40_EAR",
+      1.0
+    ],
+    [
+      "T_N40_SYM",
+      1.0
+    ],
+    [
+      "T_N40_LAT",
+      1.0
+    ],
+    [
+      "H1_N30_SYM_2",
+      0.94
+    ],
+    [
+      "H2_A40_SYM_2",
+      1.0
+    ],
+    [
+      "H3_N20_B23_2",
+      0.88
+    ],
+    [
+      "H4_N20_B44_2",
+      0.88
+    ],
+    [
+      "H5_N20_SYM_1",
+      0.579405581058051
+    ],
+    [
+      "H6_N20_SYM_3",
+      1.1805944189419493
+    ],
+    [
+      "H7_N30_B23_3",
+      1.2610894929607184
+    ],
+    [
+      "H8_N40_LAT_1",
+      0.6584154330205124
+    ],
+    [
+      "V_CO1_T_N40_SYM",
+      1.9564367875425654
+    ],
+    [
+      "V_OBC30_T_N40_SYM",
+      1.0
+    ],
+    [
+      "V_OBC50_T_N40_SYM",
+      1.0
+    ]
+  ],
+  "medium_equivalents": 19.525941713523796,
+  "mac_core_h_per_medium_eq_clean": 30.573333333333334,
+  "fine_factor_measured": {
+    "fine_sim_time_s": 0.41842109,
+    "fine_exec_s": 12159.03,
+    "medium_clean_to_same_time_s": 1665.9624784412697,
+    "ratio": 7.298501711380917
+  },
+  "fine_factor_used": [
+    5.838801369104734,
+    7.298501711380917,
+    9.123127139226145
+  ],
+  "rows": [
+    {
+      "mesh": "medium",
+      "scenario": "optimistic",
+      "airflow_core_h": 213.20468737671462,
+      "particle_core_h": 8.97023134920635,
+      "critical_path_case_h": 3.1415333010049746,
+      "wall_h_one_instance": 4.141533301004975,
+      "compute_usd": 3.840443830021913,
+      "storage_GB": 101.875
+    },
+    {
+      "mesh": "medium",
+      "scenario": "central",
+      "airflow_core_h": 298.48656232740046,
+      "particle_core_h": 12.55832388888889,
+      "critical_path_case_h": 4.398146621406964,
+      "wall_h_one_instance": 5.398146621406964,
+      "compute_usd": 5.005701362030678,
+      "storage_GB": 101.875
+    },
+    {
+      "mesh": "medium",
+      "scenario": "pessimistic",
+      "airflow_core_h": 459.2100958883084,
+      "particle_core_h": 19.32049829059829,
+      "critical_path_case_h": 6.7663794175491745,
+      "wall_h_one_instance": 7.7663794175491745,
+      "compute_usd": 7.20176363389335,
+      "storage_GB": 101.875
+    },
+    {
+      "mesh": "fine",
+      "scenario": "optimistic",
+      "airflow_core_h": 1244.859820554708,
+      "particle_core_h": 13.006835456349208,
+      "critical_path_case_h": 6.11426297966532,
+      "wall_h_one_instance": 15.558641851979827,
+      "compute_usd": 14.427528589340893,
+      "storage_GB": 186.4375
+    },
+    {
+      "mesh": "fine",
+      "scenario": "central",
+      "airflow_core_h": 2178.5046859707386,
+      "particle_core_h": 18.20956963888889,
+      "critical_path_case_h": 10.699960214414308,
+      "wall_h_one_instance": 26.424933514000315,
+      "compute_usd": 24.503840847532494,
+      "storage_GB": 186.4375
+    },
+    {
+      "mesh": "fine",
+      "scenario": "pessimistic",
+      "airflow_core_h": 4189.432088405267,
+      "particle_core_h": 28.014722521367524,
+      "critical_path_case_h": 20.576846566181356,
+      "wall_h_one_instance": 49.81304179313234,
+      "compute_usd": 46.19163365477162,
+      "storage_GB": 186.4375
+    }
+  ]
+}

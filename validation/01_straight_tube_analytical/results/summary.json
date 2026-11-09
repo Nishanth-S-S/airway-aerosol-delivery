@@ -1,0 +1,16 @@
+{
+  "Q_L_min": 0.2009897622,
+  "Re": 47.39039135554752,
+  "dp_exact_Pa": 0.11373693925331405,
+  "dp_cfd_Pa": 0.1125524529883056,
+  "dp_error_percent": -1.041426182895924,
+  "u_centre_exact": 0.23695195677773762,
+  "u_centre_cfd": 0.23488086399999997,
+  "airflow_qa": "PASSED",
+  "u_centre_error_percent": -0.874055992574202,
+  "pich_particle_um": 10.0,
+  "pich_epsilon": 0.19494700231573123,
+  "pich_deposition_percent": 29.52487059776266,
+  "cfd_deposition_percent": 29.23984767356,
+  "cfd_mass_balance_error_percent": -4.3759982374648566e-08
+}

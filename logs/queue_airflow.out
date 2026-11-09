@@ -1,0 +1,35 @@
+/Users/nishanthsadagopa/anaconda3/lib/python3.10/site-packages/pandas/core/arrays/masked.py:60: UserWarning: Pandas requires version '1.3.6' or newer of 'bottleneck' (version '1.3.5' currently installed).
+  from pandas.core import (
+2026-11-05 16:51:44 mesh n40/coarse
+
+=== Meshing n40 (coarse) ===
+    $ blockMesh   (log: cases/mesh/n40_coarse/logs/blockMesh.log)
+    $ surfaceFeatureExtract   (log: cases/mesh/n40_coarse/logs/surfaceFeatureExtract.log)
+    $ snappyHexMesh -overwrite   (log: cases/mesh/n40_coarse/logs/snappyHexMesh.log)
+    $ checkMesh -constant   (log: cases/mesh/n40_coarse/logs/checkMesh.log)
+    $ postProcess -dict system/meshSurfaces -time 0   (log: cases/mesh/n40_coarse/logs/meshSurfaces.log)
+[PASSED] n40/coarse: 59428 cells, maxNonOrtho 51.080062, maxSkew 1.2550065  (153.8 s)
+  [png] results/visualizations/mesh/mesh_n40_coarse.png
+2026-11-05 16:54:44 airflow start T_N40_SYM (n40, Beta(3,3), 2.0 L/min, mesh coarse)
+
+=== Airflow case T_N40_SYM (n40, beta33) ===
+    $ decomposePar -force   (log: cases/airflow/T_N40_SYM/logs/decomposePar.log)
+    $ mpirun -np 8 --oversubscribe pimpleFoam -parallel   (log: cases/airflow/T_N40_SYM/logs/pimpleFoam.log)
+    $ reconstructPar -newTimes   (log: cases/airflow/T_N40_SYM/logs/reconstructPar.log)
+[PASSED] T_N40_SYM: 29.7 min; imbalance 9.90e-07 %; target branch 39.1 % of flow; peak dp 2.64 Pa
+2026-11-05 17:24:24 airflow PASSED T_N40_SYM: 29.7 min, split 39.07477327318321, imbalance 9.899817018829432e-07
+2026-11-05 17:24:24 mesh n40/medium
+
+=== Meshing n40 (medium) ===
+    $ blockMesh   (log: cases/mesh/n40_medium/logs/blockMesh.log)
+    $ surfaceFeatureExtract   (log: cases/mesh/n40_medium/logs/surfaceFeatureExtract.log)
+    $ snappyHexMesh -overwrite   (log: cases/mesh/n40_medium/logs/snappyHexMesh.log)
+    $ checkMesh -constant   (log: cases/mesh/n40_medium/logs/checkMesh.log)
+    $ postProcess -dict system/meshSurfaces -time 0   (log: cases/mesh/n40_medium/logs/meshSurfaces.log)
+[PASSED] n40/medium: 218220 cells, maxNonOrtho 63.141723, maxSkew 2.6413043  (158.9 s)
+  [png] results/visualizations/mesh/mesh_n40_medium.png
+2026-11-05 17:27:10 airflow start V_MESH_medium_T_N40_SYM (n40, Beta(3,3), 2.0 L/min, mesh medium)
+
+=== Airflow case V_MESH_medium_T_N40_SYM (n40, beta33) ===
+    $ decomposePar -force   (log: cases/airflow/V_MESH_medium_T_N40_SYM/logs/decomposePar.log)
+    $ mpirun -np 8 --oversubscribe pimpleFoam -parallel   (log: cases/airflow/V_MESH_medium_T_N40_SYM/logs/pimpleFoam.log)

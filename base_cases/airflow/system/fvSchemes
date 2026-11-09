@@ -1,0 +1,24 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  airway-aerosol-delivery : reusable AIRFLOW base case (OpenFOAM v2406)
+  Case-specific values come from system/caseParameters (written by
+  scripts/generate_airflow_cases.py from config/experiment.yaml).
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSchemes;
+}
+
+ddtSchemes      { default backward; }
+gradSchemes     { default Gauss linear; grad(U) cellLimited Gauss linear 1; }
+divSchemes
+{
+    default         none;
+    div(phi,U)      Gauss linearUpwind grad(U);
+    div((nuEff*dev2(T(grad(U))))) Gauss linear;
+}
+laplacianSchemes { default Gauss linear limited corrected 0.5; }
+interpolationSchemes { default linear; }
+snGradSchemes   { default limited corrected 0.5; }

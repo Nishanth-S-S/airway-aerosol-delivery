@@ -1,0 +1,17 @@
+{
+  "cases_with_results": 12,
+  "cases_with_problems": 0,
+  "max_abs_introduced_mass_err_percent": 1.3214754876815833,
+  "parcels_outside_window": 0,
+  "max_window_edge_deviation_ms": 1.0000000000000009,
+  "max_mass_released_before_window_start_percent": 0.9570002124454726,
+  "max_abs_balance_err_percent": 4.868322725866779e-06,
+  "mean_inlet_weight_range": [
+    1.003761804087188,
+    1.0081813412495149
+  ],
+  "all_airflow_links_ok": true,
+  "all_geometry_hashes_ok": true,
+  "all_planes_ok": true,
+  "problem_cases": []
+}

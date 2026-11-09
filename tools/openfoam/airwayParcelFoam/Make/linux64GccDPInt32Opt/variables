@@ -1,0 +1,1 @@
+EXE = $(AIRWAY_BIN)/airwayParcelFoam

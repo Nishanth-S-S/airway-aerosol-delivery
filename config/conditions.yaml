@@ -1,0 +1,42 @@
+# Condition registry for the robust-optimization study (docs/PREREGISTRATION.md).
+# A condition = geometry + breathing waveform Beta(a,b) + mean inlet flow (+ optional outlet model).
+# Inhalation is always 2 s, followed by 1 s with zero inlet flow.
+# DO NOT edit the test set after test results have been seen.
+
+training:
+  - {id: T_HLT_EAR, geometry: healthy, a: 2, b: 5, flow_lpm: 2.0}
+  - {id: T_HLT_SYM, geometry: healthy, a: 3, b: 3, flow_lpm: 2.0}
+  - {id: T_HLT_LAT, geometry: healthy, a: 5, b: 2, flow_lpm: 2.0}
+  - {id: T_N20_EAR, geometry: n20, a: 2, b: 5, flow_lpm: 2.0}
+  - {id: T_N20_SYM, geometry: n20, a: 3, b: 3, flow_lpm: 2.0}
+  - {id: T_N20_LAT, geometry: n20, a: 5, b: 2, flow_lpm: 2.0}
+  - {id: T_N40_EAR, geometry: n40, a: 2, b: 5, flow_lpm: 2.0}
+  - {id: T_N40_SYM, geometry: n40, a: 3, b: 3, flow_lpm: 2.0}
+  - {id: T_N40_LAT, geometry: n40, a: 5, b: 2, flow_lpm: 2.0}
+
+reference_condition: T_N20_SYM      # Method B
+
+test:
+  - {id: H1_N30_SYM_2,    geometry: n30,    a: 3, b: 3, flow_lpm: 2.0}
+  - {id: H2_A40_SYM_2,    geometry: asym40, a: 3, b: 3, flow_lpm: 2.0}
+  - {id: H3_N20_B23_2,    geometry: n20,    a: 2, b: 3, flow_lpm: 2.0}
+  - {id: H4_N20_B44_2,    geometry: n20,    a: 4, b: 4, flow_lpm: 2.0}
+  - {id: H5_N20_SYM_1,    geometry: n20,    a: 3, b: 3, flow_lpm: 1.0}
+  - {id: H6_N20_SYM_3,    geometry: n20,    a: 3, b: 3, flow_lpm: 3.0}
+  - {id: H7_N30_B23_3,    geometry: n30,    a: 2, b: 3, flow_lpm: 3.0}
+  - {id: H8_N40_LAT_1,    geometry: n40,    a: 5, b: 2, flow_lpm: 1.0}
+
+# Extra geometries built with scripts/build_geometry_v002.py (held-out only)
+extra_geometries:
+  n30:    {label: "30% narrowing", min_diameter_mm: 4.2, shape_from: n40, eccentric: false}
+  asym40: {label: "Asymmetric 40% (same min. area)", min_diameter_mm: 3.6, shape_from: n40, eccentric: true}
+
+optimization:
+  sizes_um: [1, 2, 3, 5]
+  window_width: 0.10
+  s_min: 0.0
+  s_max: 1.0          # s + w <= s_max
+  s_step: 0.005
+  map_parcels: 100000 # parcels per continuous-release response-map run
+  eval_parcels: 20000 # parcels per direct evaluation run
+  penetration_volumes_mL: [5, 10, 20]

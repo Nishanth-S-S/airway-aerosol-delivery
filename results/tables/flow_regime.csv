@@ -1,0 +1,9 @@
+section,flow,diameter_mm,Q_L_per_min,mean_velocity_m_s,Re
+parent airway,mean,8.0,2.0,0.663,354.0
+parent airway,peak,8.0,4.915,1.63,869.0
+daughter branch (healthy),mean,6.0,1.0,0.589,236.0
+daughter branch (healthy),peak,6.0,2.458,1.449,579.0
+N20 throat (4.8 mm),mean,4.8,1.0,0.921,295.0
+N20 throat (4.8 mm),peak,4.8,2.458,2.264,724.0
+N40 throat (3.6 mm),mean,3.6,1.0,1.637,393.0
+N40 throat (3.6 mm),peak,3.6,2.458,4.024,966.0

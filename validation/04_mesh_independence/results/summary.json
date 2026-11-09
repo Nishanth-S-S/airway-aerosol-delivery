@@ -1,0 +1,149 @@
+{
+  "criteria_file": "validation/04_mesh_independence/CRITERIA.md",
+  "levels": {
+    "coarse": {
+      "case": "T_N40_SYM",
+      "cells": 59428,
+      "qa": "PASSED",
+      "imbalance_percent": 9.899817018829432e-07,
+      "target_split_percent": 39.07477327318321,
+      "peak_dp_Pa": 2.636830452,
+      "mean_dp_Pa": 1.8555137482847743,
+      "wallclock_min": 29.7
+    },
+    "medium": {
+      "case": "V_MESH_medium_T_N40_SYM",
+      "cells": 218220,
+      "qa": "PASSED",
+      "imbalance_percent": 3.2318045540918246e-06,
+      "target_split_percent": 38.502909497121344,
+      "peak_dp_Pa": 2.614972092,
+      "mean_dp_Pa": 1.8607186645639817,
+      "wallclock_min": 1427.6
+    }
+  },
+  "checks": {
+    "C1": {
+      "pass": true,
+      "value": [
+        9.899817018829432e-07,
+        3.2318045540918246e-06
+      ]
+    },
+    "C2": {
+      "pass": false,
+      "value": 0.5718637760618677,
+      "unit": "pts"
+    },
+    "C3": {
+      "pass": true,
+      "value": {
+        "peak_rel_percent": 0.8358926684866496,
+        "mean_rel_percent": -0.2797261283143543
+      }
+    },
+    "C4a": {
+      "pass": true,
+      "value": 0.062237493309574635,
+      "n_points": 2254,
+      "snapshot_t": [
+        1.0,
+        1.0
+      ]
+    },
+    "C4b": {
+      "pass": false,
+      "value": {
+        "l2_rel": 0.36530503752397925,
+        "jet_max_coarse": 2.9937954939944174,
+        "jet_max_medium": 3.0652517087618905,
+        "jet_max_rel_percent": -2.3311695598511073
+      },
+      "n_points": 3103
+    },
+    "C5": {
+      "pass": false,
+      "value": [
+        {
+          "size_um": 1,
+          "delivery_coarse": 34.81498694028659,
+          "delivery_medium": 36.091283880590275,
+          "delivery_diff": -1.2762969403036877,
+          "delivery_tol": 1.0
+        },
+        {
+          "size_um": 3,
+          "delivery_coarse": 34.81112874114711,
+          "delivery_medium": 36.11418348346982,
+          "delivery_diff": -1.3030547423227148,
+          "delivery_tol": 1.0
+        },
+        {
+          "size_um": 5,
+          "delivery_coarse": 34.66880802315846,
+          "delivery_medium": 36.02243530699221,
+          "delivery_diff": -1.3536272838337453,
+          "delivery_tol": 1.0
+        }
+      ]
+    },
+    "C6": {
+      "pass": false,
+      "value": [
+        {
+          "size_um": 1,
+          "deposition_coarse": 4.441484632283857,
+          "deposition_medium": 0.4857979751169455,
+          "deposition_diff": 3.9556866571669116,
+          "deposition_tol": 1.0
+        },
+        {
+          "size_um": 3,
+          "deposition_coarse": 4.715145225889836,
+          "deposition_medium": 0.779065473410319,
+          "deposition_diff": 3.9360797524795172,
+          "deposition_tol": 1.0
+        },
+        {
+          "size_um": 5,
+          "deposition_coarse": 5.3422011305759805,
+          "deposition_medium": 1.638346611269368,
+          "deposition_diff": 3.7038545193066126,
+          "deposition_tol": 1.0
+        }
+      ]
+    },
+    "C7": {
+      "pass": false,
+      "value": {
+        "bins_within_2se": 6,
+        "coarse": [
+          37.56,
+          37.68,
+          36.19,
+          36.26,
+          37.25,
+          35.12,
+          37.43,
+          36.89,
+          35.34,
+          18.3
+        ],
+        "medium": [
+          40.06,
+          39.5,
+          37.79,
+          36.91,
+          38.42,
+          37.62,
+          36.88,
+          38.0,
+          36.71,
+          19.35
+        ]
+      },
+      "gating": false
+    }
+  },
+  "coarse_adequate": false
+}

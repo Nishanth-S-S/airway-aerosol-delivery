@@ -1,0 +1,20 @@
+# Large simulation data: moved with local/bundle.py (meshes, saved airflow/particle cases) or kept on the machine
+cases/
+archive/
+geometry/
+e3_mesh_tree/
+
+# machine-specific settings / secrets
+cloud/aws/config.env
+cloud/aws/state.env
+local/desktop.env
+cloud/results/upload_manifest_*.json
+
+# run-time control files
+DRAIN
+logs/*.pid
+
+# Python / OS clutter
+__pycache__/
+*.pyc
+.DS_Store

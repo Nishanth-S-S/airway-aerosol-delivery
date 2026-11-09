@@ -1,0 +1,28 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  airway-aerosol-delivery : reusable AIRFLOW base case (OpenFOAM v2406)
+  Case-specific values come from system/caseParameters (written by
+  scripts/generate_airflow_cases.py from config/experiment.yaml).
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    object      U;
+}
+
+dimensions      [0 1 -1 0 0 0 0];
+internalField   uniform (0 0 0);
+boundaryField
+{
+    inlet
+    {
+        // Written per case by scripts/lib/foam_case.py:
+        //   plug      -> flowRateInletVelocity with Q(t) table
+        //   parabolic -> timeVaryingMappedFixedValue, u = 2*Q(t)/(pi R^2) * (1 - r^2/R^2)
+        #include "../constant/inletVelocityBC"   // relative: also works when read from a particle case
+    }
+    targetOutlet     { type pressureInletOutletVelocity; value uniform (0 0 0); }
+    comparisonOutlet { type pressureInletOutletVelocity; value uniform (0 0 0); }
+    walls            { type noSlip; }
+}

@@ -1,0 +1,89 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  airway-aerosol-delivery : reusable PARTICLE base case (airwayParcelFoam)
+  Case values come from constant/particleParameters (generated).
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      kinematicCloudProperties;
+}
+
+#include "particleParameters"
+
+solution
+{
+    active          true;
+    coupled         false;          // ONE-WAY coupling: particles never act on the air
+    transient       yes;
+    cellValueSourceCorrection off;
+    maxCo           0.3;            // sub-step: a parcel crosses <= 30 % of a cell per sub-step
+
+    interpolationSchemes
+    {
+        rho     cell;
+        U       cellPoint;          // air velocity interpolated to the parcel position
+        mu      cell;
+        muc     cell;
+    }
+    integrationSchemes
+    {
+        U       analytical;         // exact for linear drag over a sub-step (stiff for 1 um particles)
+    }
+    sourceTerms { schemes { U semiImplicit 1; } }
+}
+
+constantProperties
+{
+    rho0            $rhoEffective;  // rho_p * Cunningham correction (see docs/MODEL_DECISIONS.md)
+}
+
+subModels
+{
+    particleForces
+    {
+        sphereDrag;                 // Schiller-Naumann drag
+        gravity;
+    }
+
+    injectionModels
+    {
+        aerosol
+        {
+            type                patchFlowRateInjection;
+            patch               inlet;
+            SOI                 $SOI;               // window start (s), from inspired-volume fraction F
+            duration            $duration;          // window length (s)
+            concentration       constant $concentration;
+            parcelConcentration $parcelConcentration;
+            parcelBasisType     mass;
+            minParticlesPerParcel 1e-12;            // keep every parcel: nParticle is a statistical weight
+                                                    // (default 1 silently discarded ~half the 5 um parcels in v001)
+            massTotal           0;                  // set internally from concentration * flow
+            phi                 phi;
+            rho                 rho;
+            sizeDistribution
+            {
+                type        fixedValue;
+                fixedValueDistribution { value $diameter; }
+            }
+        }
+    }
+
+    dispersionModel         none;          // laminar flow, Brownian motion neglected (documented)
+    patchInteractionModel   localInteraction;
+    localInteractionCoeffs
+    {
+        patches
+        (
+            walls                                   { type stick; }
+            "(inlet|targetOutlet|comparisonOutlet)" { type escape; }
+        );
+    }
+    stochasticCollisionModel none;
+    surfaceFilmModel         none;
+    heatTransferModel        none;
+}
+
+cloudFunctions {}

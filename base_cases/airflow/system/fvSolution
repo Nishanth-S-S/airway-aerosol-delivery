@@ -1,0 +1,28 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  airway-aerosol-delivery : reusable AIRFLOW base case (OpenFOAM v2406)
+  Case-specific values come from system/caseParameters (written by
+  scripts/generate_airflow_cases.py from config/experiment.yaml).
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSolution;
+}
+
+#include "caseParameters"
+solvers
+{
+    p      { solver GAMG; smoother GaussSeidel; tolerance 1e-7; relTol 0.01; }
+    pFinal { $p; relTol 0; }
+    "(U|UFinal)" { solver smoothSolver; smoother symGaussSeidel; tolerance 1e-8; relTol 0; }
+}
+PIMPLE
+{
+    momentumPredictor yes;
+    nOuterCorrectors $nOuter;
+    nCorrectors $nCorr;
+    nNonOrthogonalCorrectors $nNonOrth;
+}
+relaxationFactors { equations { ".*" 1; } }

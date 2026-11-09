@@ -1,0 +1,137 @@
+{
+  "machine": "MacBook Pro, Intel i9-9880H (8 cores / 16 threads), Docker Desktop VM 16 vCPU / 8 GB, bind-mounted project",
+  "solver_parallel": "pimpleFoam runs in parallel: mpirun -np 8 (scotch decomposition), one Docker container per command; airwayParcelFoam (particles) runs serially (1 process)",
+  "medium_case": {
+    "cells": 218220,
+    "steps": 29007,
+    "phases": {
+      "0.0": {
+        "steps": 1148,
+        "p_iters_per_step": 40.5,
+        "exec_s": 1683,
+        "s_per_step": 1.466
+      },
+      "0.5": {
+        "steps": 5646,
+        "p_iters_per_step": 17.4,
+        "exec_s": 4438,
+        "s_per_step": 0.786
+      },
+      "1.0": {
+        "steps": 10918,
+        "p_iters_per_step": 13.8,
+        "exec_s": 7388,
+        "s_per_step": 0.677
+      },
+      "1.5": {
+        "steps": 5852,
+        "p_iters_per_step": 17.4,
+        "exec_s": 23690,
+        "s_per_step": 4.048
+      },
+      "2.0": {
+        "steps": 2198,
+        "p_iters_per_step": 41.8,
+        "exec_s": 26461,
+        "s_per_step": 12.039
+      },
+      "2.5": {
+        "steps": 2163,
+        "p_iters_per_step": 42.2,
+        "exec_s": 20661,
+        "s_per_step": 9.552
+      },
+      "3.0": {
+        "steps": 1082,
+        "p_iters_per_step": 42.2,
+        "exec_s": 870,
+        "s_per_step": 0.804
+      }
+    },
+    "actual_solver_s": 85190,
+    "clean_model_solver_s": 13758,
+    "slowdown_from_machine_state": 6.19,
+    "model": {
+      "iteration_equivalents_per_step_overhead": 8.13,
+      "clean_s_per_iteration": 0.01596048017820339,
+      "clean_us_per_cell_iteration_8ranks": 0.07313940142151676
+    },
+    "reconstructPar_wall_s": 270,
+    "size_MB": 3936,
+    "write_times": 150,
+    "write_format": "binary"
+  },
+  "fine_case_so_far": {
+    "phases": {
+      "0.0": {
+        "steps": 3335,
+        "p_iters": 120201,
+        "exec_s": 7403.750000000001
+      },
+      "0.5": {
+        "steps": 2271,
+        "p_iters": 72403,
+        "exec_s": 4752.26
+      }
+    }
+  },
+  "mac_runtime_spread_identical_work": {
+    "healthy_constant": {
+      "steps": 965,
+      "exec_s": 252.75
+    },
+    "healthy_early": {
+      "steps": 5370,
+      "exec_s": 959.27
+    },
+    "healthy_late": {
+      "steps": 5337,
+      "exec_s": 8188.77
+    },
+    "healthy_symmetric": {
+      "steps": 5357,
+      "exec_s": 1451.21
+    },
+    "n20_early": {
+      "steps": 5522,
+      "exec_s": 3256.31
+    },
+    "n20_late": {
+      "steps": 5490,
+      "exec_s": 1316.11
+    },
+    "n20_symmetric": {
+      "steps": 5531,
+      "exec_s": 1171.48
+    },
+    "n40_early": {
+      "steps": 6296,
+      "exec_s": 982.72
+    },
+    "n40_late": {
+      "steps": 6269,
+      "exec_s": 777.92
+    },
+    "n40_symmetric": {
+      "steps": 6274,
+      "exec_s": 985.87
+    },
+    "val_tube_coarse": {
+      "steps": 773,
+      "exec_s": 39.75
+    },
+    "T_N40_SYM": {
+      "steps": 6377,
+      "exec_s": 1459.85
+    }
+  },
+  "particle_runs_s": {
+    "map_100k_medium": 306.38,
+    "map_100k_coarse": 584.92,
+    "direct_20k_coarse": 175.68
+  },
+  "sizes_MB": {
+    "particle_map": 154,
+    "particle_direct": 39
+  }
+}
