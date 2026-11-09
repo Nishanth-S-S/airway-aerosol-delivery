@@ -1,6 +1,9 @@
 # Airway aerosol delivery — CFD workflow
 
-> **Running the remaining v002 study on the desktop (Ryzen 9 9950X3D):** see [local/README.md](local/README.md).
+> **Running it on a Windows PC: download this repo (Code → Download ZIP), open the `windows` folder and double-click
+> `START_HERE.bat`.** Step-by-step: [windows/INSTRUCTIONS.md](windows/INSTRUCTIONS.md).
+>
+> Running the remaining v002 study on the desktop (Ryzen 9 9950X3D), technical details: [local/README.md](local/README.md).
 > Large data (meshes, saved cases, geometry) is not in this repo; it is moved with `local/bundle.py`.
 > Cloud (AWS) path: [cloud/README.md](cloud/README.md).
 

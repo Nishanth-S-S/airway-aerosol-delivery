@@ -89,12 +89,29 @@ def make(dest: Path):
         for f in files:
             tar.add(ROOT / f, arcname=f, recursive=False)
     out.close()
+    man["n_parts"] = out.i
+    (dest / "MANIFEST.json").write_text(json.dumps(man, indent=1))
     print(f"wrote {out.i} part(s) + MANIFEST.json")
 
 
 def unpack(src: Path):
-    parts = sorted(src.glob("airway_data.tar.part*"))
-    man = json.loads((src / "MANIFEST.json").read_text())
+    # parts may sit in sub-folders (e.g. several Google Drive zip downloads extracted side by side); duplicates such
+    # as "airway_data.tar.part01 (1)" are ignored
+    import re
+    found = {}
+    for f in src.rglob("airway_data.tar.part*"):
+        m = re.fullmatch(r"airway_data\.tar\.part(\d+)", f.name)
+        if m:
+            found.setdefault(int(m.group(1)), f)
+    mans = sorted(src.rglob("MANIFEST.json"))
+    if not mans:
+        sys.exit(f"refused: no MANIFEST.json under {src}")
+    man = json.loads(mans[0].read_text())
+    n = man.get("n_parts", max(found) if found else 0)
+    missing = [i for i in range(1, n + 1) if i not in found]
+    if not found or missing:
+        sys.exit(f"refused: bundle incomplete under {src} - missing part(s) {missing or 'all'} of {n}")
+    parts = [found[i] for i in range(1, n + 1)]
     clash = [f for f in man["sha256"] if (ROOT / f).exists()]
     if clash:
         sys.exit(f"refused: {len(clash)} files already exist here (e.g. {clash[0]}) - nothing overwritten")

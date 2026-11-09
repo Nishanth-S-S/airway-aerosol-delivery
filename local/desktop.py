@@ -79,8 +79,12 @@ def check():
         problems.append(f"expected 2 groups of 8 physical cores, got {[len(x) for x in g]} (set AIRWAY_CORE_GROUPS)")
     if res["mem_total_GiB"] and res["mem_total_GiB"] < 40:
         problems.append(f"only {res['mem_total_GiB']} GiB visible to Linux (WSL2: set memory=56GB in .wslconfig)")
-    if free_gb < 250:
-        problems.append(f"only {free_gb:.0f} GB free disk; the medium study needs ~120 GB, fine ~250 GB")
+    warnings = []
+    if free_gb < 130:
+        problems.append(f"only {free_gb:.0f} GB free disk; stage 1 + the medium study need ~130 GB")
+    elif free_gb < 250:
+        warnings.append(f"{free_gb:.0f} GB free disk: enough for the medium study, not for a fine-mesh study (~250 GB)")
+    res["warnings"] = warnings
     if str(ROOT).startswith("/mnt/"):
         problems.append("project is on a Windows drive (/mnt/...): copy it into the WSL2 home folder (10x faster disk)")
     import bench as B
@@ -333,9 +337,75 @@ def stop():
           "Resume later with the same command (e.g. bash local/run.sh stage1).")
 
 
+def next_step():
+    """Which step comes next (used by windows/START_HERE.ps1): stage1 | waiting | production | done."""
+    import yaml
+    st = ROOT / "logs/cloud_status.json"
+    if st.exists() and json.loads(st.read_text()).get("state") == "finished":
+        print("done"); return 0
+    md = ROOT / "validation/04_mesh_independence/results/MESH_DECISION.json"
+    d = json.loads(md.read_text()) if md.exists() else {}
+    lvl = yaml.safe_load((ROOT / "config/experiment.yaml").read_text())["mesh"]["level"]
+    s = json.loads((OUT / "summary.json").read_text()) if (OUT / "summary.json").exists() else {}
+    fd = json.loads((OUT / "fine_done.json").read_text()) if (OUT / "fine_done.json").exists() else {}
+    if d.get("approved") is True and d.get("production_level") == lvl and s.get("required_pass"):
+        print("production")
+    elif s and fd.get("rc") == 0:
+        print("waiting")
+    else:
+        print("stage1")
+    return 0
+
+
+def pack_results():
+    """Small zip (~0.2-0.5 GB) of everything needed off this PC: benchmark/equivalence results, QA reports, logs, and the
+    parts of the fine-mesh / D_EQ cases the mesh comparison reads (flow histories, mid-plane snapshots every 0.25 s,
+    particle map summaries and parcel tables). Full 3-D fields stay here."""
+    import zipfile
+    dest = Path(sys.argv[2]) if len(sys.argv) > 2 else ROOT / f"airway_results_{time.strftime('%Y%m%d_%H%M')}.zip"
+    take = []
+    for p in ("cloud/results", "validation", "results", "logs", "docs"):
+        take += [f for f in (ROOT / p).rglob("*") if f.is_file()]
+    for aid in sorted({FINE, EQ, *[p.name for p in (ROOT / "cases/airflow").glob("*") if p.is_dir()]}):
+        d = ROOT / "cases/airflow" / aid
+        if not d.is_dir():
+            continue
+        for f in d.glob("*.json"):
+            take.append(f)
+        take += [f for f in (d / "logs").rglob("*") if f.is_file()]
+        pp = d / "postProcessing"
+        if pp.exists() and aid in (FINE, EQ):          # production cases: QA + logs only (analysis runs on this PC)
+            for f in pp.rglob("*"):
+                if not f.is_file():
+                    continue
+                if "midPlane" in f.parts:
+                    try:
+                        t = float(f.parent.name)
+                    except ValueError:
+                        continue
+                    if abs(t / 0.25 - round(t / 0.25)) > 1e-6:
+                        continue
+                take.append(f)
+    for d in (ROOT / "cases/particles").glob("*"):
+        if d.is_dir():
+            take += [f for f in d.glob("*.json")]
+            if FINE in d.name or EQ in d.name:
+                take += [f for f in (d / "postProcessing").rglob("*") if f.is_file()] if (d / "postProcessing").exists() else []
+            take += [f for f in (d / "logs").rglob("*") if f.is_file()] if (d / "logs").exists() else []
+    take += [f for f in (ROOT / "cases/bench_desktop").rglob("logs/*") if f.is_file()] if (ROOT / "cases/bench_desktop").exists() else []
+    take = sorted(set(take))
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    with zipfile.ZipFile(dest, "w", zipfile.ZIP_DEFLATED, allowZip64=True) as z:
+        for f in take:
+            z.write(f, f.relative_to(ROOT))
+    print(f"results: {len(take)} files, {dest.stat().st_size / 1e6:.0f} MB -> {dest}")
+    return 0
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "status"
-    fn = {"check": check, "stage1": stage1, "production": production, "status": status, "stop": stop}.get(cmd)
+    fn = {"check": check, "stage1": stage1, "production": production, "status": status, "stop": stop,
+          "next": next_step, "pack-results": pack_results}.get(cmd)
     if fn is None:
         sys.exit(__doc__)
     sys.exit(fn() or 0)

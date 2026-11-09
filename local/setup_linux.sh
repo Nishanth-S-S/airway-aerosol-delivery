@@ -5,19 +5,28 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
+SUDO=sudo; [ "$(id -u)" = 0 ] && SUDO=          # the Windows installer runs this as root (no password prompts)
+export DEBIAN_FRONTEND=noninteractive
+
 # 1. Docker (Docker Desktop with WSL integration also works: then this step is skipped)
 if ! command -v docker >/dev/null; then
-  echo "Installing Docker Engine (asks for your password)"
-  sudo apt-get update -q
-  sudo apt-get install -y -q docker.io
-  sudo usermod -aG docker "$USER"
-  echo ">>> Docker installed. Close this terminal, open a new one, and run this script again."
-  exit 0
+  echo "Installing Docker Engine"
+  $SUDO apt-get update -q
+  $SUDO apt-get install -y -q docker.io
+  if [ -n "$SUDO" ]; then
+    $SUDO usermod -aG docker "$USER"
+    echo ">>> Docker installed. Close this terminal, open a new one, and run this script again."
+    exit 0
+  fi
 fi
-docker info >/dev/null 2>&1 || { echo "Docker is installed but not running / not usable by $USER (try: sudo systemctl start docker)"; exit 1; }
+if ! docker info >/dev/null 2>&1; then
+  $SUDO systemctl enable --now docker >/dev/null 2>&1 || $SUDO service docker start >/dev/null 2>&1 || true
+  for i in 1 2 3 4 5 6 7 8 9 10; do docker info >/dev/null 2>&1 && break; sleep 2; done
+fi
+docker info >/dev/null 2>&1 || { echo "Docker is installed but not running (try: sudo service docker start)"; exit 1; }
 
 # 2. tools used by the scripts
-for t in bzip2 curl; do command -v $t >/dev/null || { sudo apt-get install -y -q bzip2 curl; break; }; done
+for t in bzip2 curl git; do command -v $t >/dev/null || { $SUDO apt-get install -y -q bzip2 curl git; break; }; done
 
 # 3. Python env identical to the Mac's (cloud/toolchain_reference.json; checked again by E1)
 export MAMBA_ROOT_PREFIX=$HOME/micromamba

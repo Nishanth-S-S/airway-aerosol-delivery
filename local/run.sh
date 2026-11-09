@@ -19,6 +19,6 @@ case "$CMD" in
     echo "started $CMD (pid $!). Progress: bash local/run.sh status   Log: logs/desktop_$CMD.out"
     ;;
   *)
-    exec "$PY" local/desktop.py "$CMD"
+    exec "$PY" local/desktop.py "$@"
     ;;
 esac
