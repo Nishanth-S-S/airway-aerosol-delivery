@@ -153,9 +153,16 @@ if ($rc -ne 0) { Fail "Tool installation failed (see the messages above)." }
 Say "Tools are ready." Green
 
 # ------------------------------------------------------------------ 5. data
-Step 5 "Simulation data from Nishanth (about 6.5 GB)"
+Step 5 "Simulation data (about 7 GB, downloaded automatically)"
 $rc = L "test -f $Proj/cases/airflow/V_MESH_fine_T_N40_SYM/processor7/0.52/U_0"
 if ($rc -ne 0) {
+    Say "Downloading the simulation data from GitHub (about 7 GB; 10-40 minutes depending on the internet)..." Yellow
+    Say "(If it is interrupted, run START_HERE.bat again - it continues the download.)" Gray
+    $rc = L "cd $Proj && bash local/fetch_data.sh"
+    if ($rc -eq 1) { Fail "The data download failed (see above). Check the internet connection and run START_HERE.bat again - it continues where it stopped." }
+}
+if ($rc -ne 0) {
+    # not on GitHub (or no internet): use a copy downloaded by hand (Google Drive / USB)
     $src = FindData
     if ($src) { Say "Found the data in: $src" Green }
     for ($try = 1; (-not $src) -and $try -le 3; $try++) {

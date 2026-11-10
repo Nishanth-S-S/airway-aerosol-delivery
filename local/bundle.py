@@ -112,9 +112,20 @@ def unpack(src: Path):
     if not found or missing:
         sys.exit(f"refused: bundle incomplete under {src} - missing part(s) {missing or 'all'} of {n}")
     parts = [found[i] for i in range(1, n + 1)]
-    clash = [f for f in man["sha256"] if (ROOT / f).exists()]
-    if clash:
-        sys.exit(f"refused: {len(clash)} files already exist here (e.g. {clash[0]}) - nothing overwritten")
+    # re-runnable: files already present with the right content are skipped; a file that differs (e.g. cut off by an
+    # interrupted earlier unpack) is moved to unpack_quarantine/<time>/, never deleted, and extracted again
+    skip, moved = set(), 0
+    qdir = ROOT / "unpack_quarantine" / time.strftime("%Y%m%d_%H%M%S")
+    for f, h in man["sha256"].items():
+        if (ROOT / f).exists():
+            if sha(ROOT / f) == h:
+                skip.add(f)
+            else:
+                (qdir / f).parent.mkdir(parents=True, exist_ok=True)
+                (ROOT / f).rename(qdir / f)
+                moved += 1
+    if skip or moved:
+        print(f"{len(skip)} files already in place (skipped); {moved} differing files moved to {qdir.relative_to(ROOT)}")
 
     class Cat(io.RawIOBase):
         def __init__(self):
@@ -138,7 +149,8 @@ def unpack(src: Path):
         for m in tar:
             if m.name.startswith("/") or ".." in Path(m.name).parts or m.name not in man["sha256"]:
                 sys.exit(f"refused: unexpected entry {m.name}")
-            tar.extract(m, ROOT)
+            if m.name not in skip:
+                tar.extract(m, ROOT)
     bad = [f for f, h in man["sha256"].items() if not (ROOT / f).exists() or sha(ROOT / f) != h]
     print(f"unpacked {man['n_files']} files; SHA-256 check: {'ALL OK' if not bad else f'{len(bad)} MISMATCHES e.g. {bad[:3]}'}")
     sys.exit(1 if bad else 0)

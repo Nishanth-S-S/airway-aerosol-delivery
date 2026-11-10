@@ -6,22 +6,16 @@ You only have to double-click one file; it does everything else.
 ## What you need
 - Windows 11 (Windows 10 version 2004 or newer also works)
 - About **150 GB of free disk space** on drive C:
-- The **data folder** Nishanth shared with you (about 6.5 GB, from Google Drive)
-- Internet connection for the first setup
+- An internet connection (the program downloads about 7 GB of simulation data by itself)
 
 ## Steps
 
-### 1. Download the data
-Open the Google Drive link from Nishanth and download everything into your **Downloads** folder.
-- Google Drive may give you `.zip` files instead: leave them in Downloads. You don't need to unzip them yourself.
-- The program finds the data in Downloads, Desktop or Documents on its own. If it can't, it asks you to pick the folder. Pick the folder with the **Google Drive files** (`airway_data.tar.part01`, … or `airway_data…zip`), **not** the program folder.
-
-### 2. Download the program
+### 1. Download the program
 1. Go to **https://github.com/Nishanth-S-S/airway-aerosol-delivery**.
 2. Click the green **Code** button, then **Download ZIP**.
 3. Right-click the downloaded zip, choose **Extract All…**, and then **Extract**.
 
-### 3. Double-click `START_HERE.bat`
+### 2. Double-click `START_HERE.bat`
 It's in the extracted folder, inside the **`windows`** folder.
 - If Windows says *"Windows protected your PC"*, click **More info**, then **Run anyway**.
 - Click **Yes** when it asks for administrator permission.
@@ -34,7 +28,7 @@ A blue window opens and works through 7 steps by itself:
 | 2 | Sets memory and CPU limits | seconds |
 | 3 | Downloads the program code | 1 min |
 | 4 | Installs the simulation tools | 10–20 min |
-| 5 | **A folder window opens: pick the data folder from step 1** | 5–15 min |
+| 5 | Downloads and checks the simulation data (about 7 GB) | 10–40 min |
 | 6 | Checks the PC | 2 min |
 | 7 | Starts the simulation | 9–19 hours |
 
@@ -42,13 +36,13 @@ A blue window opens and works through 7 steps by itself:
 
 At step 7 it asks whether to turn off sleep while plugged in. Type **Y** and press Enter.
 
-### 4. While it runs
+### 3. While it runs
 - **Leave the blue window open.** Minimizing it is fine. It shows progress every 5 minutes.
 - **Pause Windows Update:** go to *Settings → Windows Update → Pause updates (1 week)*, so Windows doesn't restart by itself.
 - You can still use the PC for light things like browsing and documents, but it will be slower. Avoid games or other heavy programs.
 - To check progress at any time, double-click **`STATUS.bat`**.
 
-### 5. When it's finished
+### 4. When it's finished
 The window says **FINISHED** and puts a file named `airway_results_….zip` on your **Desktop**.
 Send that file to Nishanth by Google Drive, WeTransfer or email.
 
@@ -61,7 +55,7 @@ Later, Nishanth may ask you to run the next part. When he does, double-click `ST
 | The PC restarted, or the window was closed | Double-click `START_HERE.bat`. It continues from the last save. |
 | A red error message | Take a screenshot of the window and send it to Nishanth. |
 | "Virtualization" or "SVM" error at step 1 | Restart into the BIOS (press Del or F2 while the PC starts), turn on **SVM Mode** (often under Advanced → CPU Configuration), save and restart. Then run `START_HERE.bat` again. |
-| "That folder does not contain the data" | You picked the wrong folder (often the program's own `data` folder). Pick the folder with the Google Drive download. |
+| The data download stops (internet dropped) | Double-click `START_HERE.bat` again. The download continues where it stopped. |
 | Nishanth asks for the results early | Double-click **`SEND_RESULTS.bat`**. The zip appears on your Desktop. |
 
 Nothing is installed outside the Linux part. To remove everything afterwards, open PowerShell and run `wsl --unregister Ubuntu-24.04`.

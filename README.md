@@ -4,7 +4,7 @@
 > `START_HERE.bat`.** Step-by-step: [windows/INSTRUCTIONS.md](windows/INSTRUCTIONS.md).
 >
 > Running the remaining v002 study on the desktop (Ryzen 9 9950X3D), technical details: [local/README.md](local/README.md).
-> Large data (meshes, saved cases, geometry) is not in this repo; it is moved with `local/bundle.py`.
+> Large data (meshes, saved cases, geometry, ~7 GB) is not in the code: it is attached to the GitHub release `data-v1` and downloaded automatically (`local/fetch_data.sh`).
 > Cloud (AWS) path: [cloud/README.md](cloud/README.md).
 
 OpenFOAM v2406 (run through Docker image `opencfd/openfoam-default:2406`), Python, pandas, matplotlib.

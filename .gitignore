@@ -18,3 +18,4 @@ logs/*.pid
 __pycache__/
 *.pyc
 .DS_Store
+unpack_quarantine/
